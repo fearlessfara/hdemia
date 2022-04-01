@@ -4,8 +4,10 @@ import com.google.common.base.Objects;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +32,7 @@ public class User {
     @Column
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Credential credential;
 
     public Long getId() {
@@ -104,5 +106,56 @@ public class User {
                 .append("email", email)
                 .append("credential", credential)
                 .toString();
+    }
+
+
+    public static final class Builder {
+        private String name;
+        private String middleName;
+        private String surname;
+        private String email;
+        private Credential credential;
+
+        private Builder() {
+        }
+
+        public static Builder anUser() {
+            return new Builder();
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withMiddleName(String middleName) {
+            this.middleName = middleName;
+            return this;
+        }
+
+        public Builder withSurname(String surname) {
+            this.surname = surname;
+            return this;
+        }
+
+        public Builder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder withCredential(Credential credential) {
+            this.credential = credential;
+            return this;
+        }
+
+        public User build() {
+            User user = new User();
+            user.setName(name);
+            user.setMiddleName(middleName);
+            user.setSurname(surname);
+            user.setEmail(email);
+            user.setCredential(credential);
+            return user;
+        }
     }
 }
