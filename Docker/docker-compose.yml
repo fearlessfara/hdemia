@@ -1,0 +1,19 @@
+
+x-mariadb_auth: &mariadb_auth
+  MARIADB_USERNAME: $MARIADB_USERNAME
+  MARIADB_ROOT_PASSWORD: $MARIADB_ROOT_PASSWORD
+  MARIADB_PASSWORD: $MARIADB_PASSWORD
+
+services:
+  mariadb:
+    image: "mariadb:$MARIADB_VERSION"
+    restart: always
+    volumes:
+      - "/var/lib/mysql/data:$/mariadb_data"
+      - "/var/lib/mysql/logs:$/mariadb_log"
+      - /var/docker/mariadb/conf:/etc/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: $MARIADB_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MARIADB_USERNAME
+      MYSQL_PASSWORD: $MARIADB_PASSWORD
