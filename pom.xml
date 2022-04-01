@@ -93,9 +93,6 @@
             <version>1.6.6</version>
         </dependency>
 
-
-
-
     </dependencies>
 
     <build>
@@ -103,6 +100,22 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <from>
+                        <image>openjdk:17.0</image>
+                    </from>
+                    <container>
+                        <jvmFlags>
+                            <jvmFlag>-Dport=8080</jvmFlag>
+                            <jvmFlag>-Dspring.profiles.active=default</jvmFlag>
+                        </jvmFlags>
+                    </container>
+                </configuration>
             </plugin>
         </plugins>
     </build>
