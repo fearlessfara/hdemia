@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 
-import static java.util.Objects.isNull;
-
 @Component
 public class UserService {
 
@@ -22,7 +20,7 @@ public class UserService {
     UserRepository userRepository;
 
     @Transactional
-    public boolean register(RegistrationRequestDTO request) {
+    public User register(RegistrationRequestDTO request) {
 
         Credential c = new Credential();
         c.setUsername(request.email());
@@ -35,7 +33,6 @@ public class UserService {
                 .withCredential(c)
                 .build();
 
-        user = userRepository.save(user);
-        return true;
+        return userRepository.save(user);
     }
 }
