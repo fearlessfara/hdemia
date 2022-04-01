@@ -9,10 +9,15 @@ import org.hdemia.hdemia.be.controller.dto.RegistrationRequestDTO;
 import org.hdemia.hdemia.be.controller.dto.RegistrationResponseDTO;
 import org.hdemia.hdemia.be.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +27,9 @@ public class AuthenticationController {
 
     @Autowired
     UserService userService;
+
+    @Value("${site.url:google.com}")
+    String siteHomepage;
 
     @PostMapping("/register")
     public RegistrationResponseDTO register(@RequestBody RegistrationRequestDTO request) {
@@ -44,6 +52,14 @@ public class AuthenticationController {
     @PostMapping("/keepAlive")
     public KeepAliveResponseDTO keepAlive(HttpServletRequest request) {
         return null;
+    }
+
+    @GetMapping("/verify/{verificationToken}")
+    public ModelAndView verify(@PathVariable("verificationToken") String verificationToken, ModelMap model) {
+        boolean verified = userService.verify(verificationToken);
+        model.addAttribute("verified", verified);
+        return new ModelAndView("redirect: " + siteHomepage, model);
+
     }
 
 

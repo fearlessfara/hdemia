@@ -1,8 +1,8 @@
 package org.hdemia.hdemia;
 
-import org.hdemia.hdemia.be.controller.v1.AuthenticationController;
 import org.hdemia.hdemia.be.controller.dto.RegistrationRequestDTO;
 import org.hdemia.hdemia.be.controller.dto.RegistrationResponseDTO;
+import org.hdemia.hdemia.be.controller.v1.AuthenticationController;
 import org.hdemia.hdemia.be.service.UserService;
 import org.hdemia.hdemia.model.entity.User;
 import org.hdemia.hdemia.model.repository.CredentialRepository;

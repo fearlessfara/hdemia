@@ -1,1 +1,15 @@
-
+spring:
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: smtp.gmail.com
+    username: <login user to smtp server>
+    password: <login password to smtp server>
+    port: '587'
+    from: hdemia@hdemia.com
+site:
+  url: http://www.siteurl.com

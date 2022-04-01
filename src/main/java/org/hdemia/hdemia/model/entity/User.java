@@ -29,11 +29,22 @@ public class User {
     @Column
     private String surname;
 
-    @Column
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private boolean verified = false;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Credential credential;
+
+    public boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
 
     public Long getId() {
         return id;
@@ -115,6 +126,7 @@ public class User {
         private String surname;
         private String email;
         private Credential credential;
+        private boolean verified;
 
         private Builder() {
         }
@@ -148,6 +160,11 @@ public class User {
             return this;
         }
 
+        public Builder withVerified(boolean verified) {
+            this.verified = verified;
+            return this;
+        }
+
         public User build() {
             User user = new User();
             user.setName(name);
@@ -155,6 +172,7 @@ public class User {
             user.setSurname(surname);
             user.setEmail(email);
             user.setCredential(credential);
+            user.setVerified(verified);
             return user;
         }
     }
