@@ -17,19 +17,27 @@ services:
     image: "mariadb:$MARIADB_VERSION"
     restart: always
     volumes:
-      - "/var/lib/mysql/data:$/mariadb_data"
-      - "/var/lib/mysql/logs:$/mariadb_log"
+      - "/var/lib/mysql/data:/mariadb_data"
+      - "/var/lib/mysql/logs:/mariadb_log"
       - /var/docker/mariadb/conf:/etc/mysql
     environment:
       MYSQL_ROOT_PASSWORD: $MARIADB_PASSWORD
       MYSQL_DATABASE: $MYSQL_DATABASE
       MYSQL_USER: $MARIADB_USERNAME
       MYSQL_PASSWORD: $MARIADB_PASSWORD
+    #todo find the v3 compatibility for resource limitation
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5
 
   activemq_artemis:
-    image: "vromero/activemq-artemis:$ACTIVEMQ_ARTEMIS_VERSION"
+    image: "vromero/activemq-artemis:$ACTIVEMQ_VERSION_ARTEMIS"
     container_name: activemq_artemis
     restart: always
     ports:
       - 61616:61616
       - 8161:8161
+    #todo find the v3 compatibility for resource limitation
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5
