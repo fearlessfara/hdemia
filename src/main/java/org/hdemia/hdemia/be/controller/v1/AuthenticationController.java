@@ -1,4 +1,4 @@
-package org.hdemia.hdemia.be.controller;
+package org.hdemia.hdemia.be.controller.v1;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
