@@ -4,9 +4,14 @@ x-mariadb_auth: &mariadb_auth
   MARIADB_ROOT_PASSWORD: $MARIADB_ROOT_PASSWORD
   MARIADB_PASSWORD: $MARIADB_PASSWORD
 
+x-activemq_artemis: &activemq_artemis
+  ACTIVEMQ_HOST: activemq_artemis
+  ACTIVEMQ_PORT: 61616
+
 services:
   mariadb:
     image: "mariadb:$MARIADB_VERSION"
+    container_name: mariadb
     restart: always
     volumes:
       - "/var/lib/mysql/data:$/mariadb_data"
@@ -17,3 +22,11 @@ services:
       MYSQL_DATABASE: $MYSQL_DATABASE
       MYSQL_USER: $MARIADB_USERNAME
       MYSQL_PASSWORD: $MARIADB_PASSWORD
+
+  activemq_artemis:
+    image: "vromero/activemq-artemis:$ACTIVEMQ_ARTEMIS_VERSION"
+    container_name: activemq_artemis
+    restart: always
+    ports:
+      - 61616:61616
+      - 8161:8161
