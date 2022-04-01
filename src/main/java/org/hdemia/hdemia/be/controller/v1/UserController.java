@@ -1,9 +1,9 @@
-package org.hdemia.hdemia.be.controller;
+package org.hdemia.hdemia.be.controller.v1;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/booking")
-public class BookingController {
+@RequestMapping("/user")
+public class UserController {
 }

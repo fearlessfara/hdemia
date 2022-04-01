@@ -1,4 +1,4 @@
-package org.hdemia.hdemia.be.controller;
+package org.hdemia.hdemia.be.controller.v1;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
@@ -31,9 +31,8 @@ public class AuthenticationController {
         Preconditions.checkArgument(!StringUtils.isBlank(request.password()) && request.password().length() >= 8, "password does not match criteria");
         Preconditions.checkNotNull(request.regNumber(), "registration number cannot be blank");
 
-        //TODO preconditions
-        boolean registered = userService.register(request);
-        return new RegistrationResponseDTO(registered);
+        userService.register(request);
+        return new RegistrationResponseDTO(true);
     }
 
     @PostMapping("/login")
