@@ -4,20 +4,17 @@ x-mariadb_auth: &mariadb_auth
   MARIADB_ROOT_PASSWORD: $MARIADB_ROOT_PASSWORD
   MARIADB_PASSWORD: $MARIADB_PASSWORD
 
-<<<<<<< HEAD
+
 x-activemq_artemis: &activemq_artemis
   ACTIVEMQ_HOST: activemq_artemis
   ACTIVEMQ_PORT: 61616
 
+
+
 services:
   mariadb:
-    image: "mariadb:$MARIADB_VERSION"
     container_name: mariadb
-=======
-services:
-  mariadb:
     image: "mariadb:$MARIADB_VERSION"
->>>>>>> 201dfcb (added docker compose and env file with mariadb)
     restart: always
     volumes:
       - "/var/lib/mysql/data:$/mariadb_data"
@@ -27,7 +24,6 @@ services:
       MYSQL_ROOT_PASSWORD: $MARIADB_PASSWORD
       MYSQL_DATABASE: $MYSQL_DATABASE
       MYSQL_USER: $MARIADB_USERNAME
-<<<<<<< HEAD
       MYSQL_PASSWORD: $MARIADB_PASSWORD
 
   activemq_artemis:
@@ -37,6 +33,3 @@ services:
     ports:
       - 61616:61616
       - 8161:8161
-=======
-      MYSQL_PASSWORD: $MARIADB_PASSWORD
->>>>>>> 201dfcb (added docker compose and env file with mariadb)
