@@ -45,6 +45,10 @@ public class AuthenticationServiceTest {
         assertThat(response.success()).isEqualTo(true);
 
         User dom = userRepository.findByEmail(request.email()).orElseThrow(IllegalStateException::new);
+        assertThat(dom.getCredential().getUsername()).isNotBlank();
+        assertThat(dom.getCredential().getUsername()).isEqualToIgnoringCase(request.email());
+        assertThat(dom.getCredential().getPassword()).isNotBlank();
+        assertThat(dom.getCredential().getPassword()).isNotEqualToIgnoringCase(request.password());
     }
 
     @Test
